@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="start-screen">
+        <button class="love-button">💌 Open the Letter</button>
+    </div>
+
+    <!-- Layar loading -->
+    <div class="loading-screen hidden">
+        <div class="spinner"></div>
+        <p>Loading your letter...</p>
+    </div>
+
+
+    <div class="letter-container hidden">
+        <div class="letter-paper">
+            <div class="letter-header">
+                <h1>HI HANNY,</h1>
+            </div>
+            <div class="letter-body">
+                <p>
+                    As this year comes to an end, I find myself reflecting on the people who’ve made it truly meaningful, and I can’t help but think of you. 
+                    I just want to take a moment to thank you for the role you’ve played in my life. You’ve introduced me to new ways of living—ways 
+                    I might never have considered before—and opened my eyes to perspectives that have enriched me in more ways than I can express. 
+
+                </p>
+                <p>
+                    Your presence has always had a calming effect on me, like a safe space where I can just be myself without any fear of judgment.
+                    You’ve made me feel completely at ease, and that kind of comfort is something rare and precious. 
+                    And in moments when life felt overwhelming, when my own battles seemed too heavy to bear, you helped me forget them—even if just for a while.
+                </p>
+                <p>
+                    You may not even realize the impact you’ve had, but I hope you know that your kindness, your energy, and just you being you have been a source of light and strength for me this year.
+                    I truly believe our paths crossed for a reason, and I’m so grateful they did. Thank you for being part of my journey and for leaving such a meaningful mark on my life.
+                    Here’s to carrying this connection into the new year and beyond. "Don't be a strangers"
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="volume-control hidden">
+        <label for="volume-slider">Volume:</label>
+        <input id="volume-slider" type="range" min="0" max="1" step="0.1" value="0">
+    </div>
+
+    <audio id="love-song" src="Phoebe Bridgers - Scott Street.mp3" preload="auto"></audio>
+
+    <script>
+        const loveButton = document.querySelector('.love-button');
+        const letterContainer = document.querySelector('.letter-container');
+        const startScreen = document.querySelector('.start-screen');
+        const loadingScreen = document.querySelector('.loading-screen');
+        const loveSong = document.getElementById('love-song');
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeControl = document.querySelector('.volume-control');
+
+        loveButton.addEventListener('click', () => {
+            startScreen.style.display = 'none'; // Sembunyikan layar awal
+            loadingScreen.classList.add('active'); // Tampilkan layar loading
+            letterContainer.classList.remove('hidden'); // Tampilkan surat
+            letterContainer.classList.add('fade-in'); // Tambahkan animasi
+            volumeControl.classList.remove('hidden'); // Tampilkan kontrol volume
+            loveSong.volume = 0; // Mulai dengan volume 0 (tidak ada suara)
+            setTimeout(() => {
+                loadingScreen.classList.remove('active'); // Sembunyikan layar loading
+                letterContainer.classList.remove('hidden'); // Tampilkan surat
+                loveSong.play(); // Mulai memutar lagu
+            }, 3000);
+        });
+
+        // Mengatur volume berdasarkan input slider
+        volumeSlider.addEventListener('input', (event) => {
+            loveSong.volume = event.target.value; // Atur volume lagu
+        });
+    </script>
+</body>
+</html>
